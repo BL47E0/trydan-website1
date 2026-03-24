@@ -1,7 +1,7 @@
 🏎️ Trydan Racing Website
 
 This is the official single-page website for the Trydan Racing team from NMIT.
-It’s a fully responsive and interactive site built to showcase the team’s information, achievements, and events.
+It is a fully responsive and interactive site built to showcase the team’s information, achievements, and events.
 
 ✨ Key Features
 
