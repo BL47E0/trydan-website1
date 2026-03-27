@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Trydan Racing</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="login-page-body">
+
+    <!-- Background -->
+    <div class="hero-bg">
+        <span class="streak"></span><span class="streak"></span><span class="streak"></span>
+        <span class="streak"></span><span class="streak"></span><span class="streak"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span>
+    </div>
+
+    <!-- Form Container -->
+    <div class="login-container">
+
+        <!-- Back Button -->
+        <a href="index.html" class="btn-secondary" style="margin-bottom: 1rem; display: inline-block;">
+            ← Back to Home
+        </a>
+
+        <!-- Title -->
+        <h2>Join Trydan Racing</h2>
+
+        <!-- Form -->
+        <form action="thankyou.html">
+
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Your name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="usn">USN</label>
+                <input type="text" id="usn" placeholder="Your USN" required>
+            </div>
+
+            <div class="form-group">
+                <label for="department">Department</label>
+                <input type="text" id="department" placeholder="e.g., Mechanical Engineering" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="your.email@nmit.ac.in" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" placeholder="Your phone number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="domain">Domain</label>
+                <input type="text" id="domain" name="domain" placeholder="e.g., Media and Marketing" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Reason to Join</label>
+                <textarea id="message" rows="4" placeholder="Why do you want to join Trydan Racing?" required></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary">Submit Application</button>
+
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

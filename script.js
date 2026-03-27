@@ -97,5 +97,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+    // // Join Form Submission (redirect to thank you page)
+    // const joinForm = document.getElementById('joinForm');
+
+    // if (joinForm) {
+    //     joinForm.addEventListener('submit', function(e) {
+    //         e.preventDefault();
+
+    //         // Future: send data to backend / Google Sheets
+
+    //         window.location.href = "thankyou.html";
+    //     });
+    // }
     
 });
