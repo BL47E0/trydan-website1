@@ -4,35 +4,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
 
-    hamburger.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        hamburger.classList.toggle('active'); // Used for styling the 'X'
-        
-        const spans = hamburger.querySelectorAll('span');
-        if (navMenu.classList.contains('active')) {
-            spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-            spans[1].style.opacity = '0';
-            spans[2].style.transform = 'rotate(-45deg) translate(7px, -7px)';
-        } else {
-            spans[0].style.transform = 'none';
-            spans[1].style.opacity = '1';
-            spans[2].style.transform = 'none';
-        }
-    });
-
-    // Close menu when clicking on a nav link
-    const navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active'); // Used for styling the 'X'
+            
+            const spans = hamburger.querySelectorAll('span');
             if (navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-                const spans = hamburger.querySelectorAll('span');
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -7px)';
+            } else {
                 spans[0].style.transform = 'none';
                 spans[1].style.opacity = '1';
                 spans[2].style.transform = 'none';
             }
         });
-    });
+    }
+
+    // Close menu when clicking on a nav link
+    const navLinks = document.querySelectorAll('.nav-link');
+    if (navLinks.length > 0) {
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    const spans = hamburger.querySelectorAll('span');
+                    spans[0].style.transform = 'none';
+                    spans[1].style.opacity = '1';
+                    spans[2].style.transform = 'none';
+                }
+            });
+        });
+    }
 
     // Active Link Highlight on Scroll
     const sections = document.querySelectorAll('section[id]');
@@ -97,17 +101,35 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-    // // Join Form Submission (redirect to thank you page)
-    // const joinForm = document.getElementById('joinForm');
+    const joinForm = document.getElementById('joinForm');
 
-    // if (joinForm) {
-    //     joinForm.addEventListener('submit', function(e) {
-    //         e.preventDefault();
+    if (joinForm) {
+        joinForm.addEventListener('submit', function(e) {
+            e.preventDefault();
 
-    //         // Future: send data to backend / Google Sheets
+            const data = {
+                name: document.getElementById('name').value,
+                usn: document.getElementById('usn').value,
+                department: document.getElementById('department').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                domain: document.getElementById('domain').value,
+                message: document.getElementById('message').value
+            };
 
-    //         window.location.href = "thankyou.html";
-    //     });
-    // }
-    
+            fetch("https://script.google.com/macros/s/AKfycbw4yYp2JkzYWCciPJ_7pIoe_2pDdgOgyYRT5tDBE4yNod8vooxY-d8kWBtjSbT90CE8/exec", {
+    method: "POST",
+    mode: "no-cors",
+    body: JSON.stringify(data)
+})
+.then(response => response.text())
+.then(() => {
+    window.location.href = "thankyou.html";
+})
+.catch(error => {
+    console.error(error);
+    alert("Error submitting form");
+});
+        });
+    }        
 });
