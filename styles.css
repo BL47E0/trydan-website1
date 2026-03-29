@@ -464,3 +464,8 @@ body {
 .admin-container .btn-secondary {
     display: inline-block;
 }
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}

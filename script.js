@@ -107,6 +107,12 @@ document.addEventListener('DOMContentLoaded', () => {
         joinForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
+            const submitBtn = joinForm.querySelector('button');
+
+            // Disable button + change text
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Submitting...";
+
             const data = {
                 name: document.getElementById('name').value,
                 usn: document.getElementById('usn').value,
@@ -117,19 +123,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 message: document.getElementById('message').value
             };
 
-            fetch("https://script.google.com/macros/s/AKfycbw4yYp2JkzYWCciPJ_7pIoe_2pDdgOgyYRT5tDBE4yNod8vooxY-d8kWBtjSbT90CE8/exec", {
-    method: "POST",
-    mode: "no-cors",
-    body: JSON.stringify(data)
-})
-.then(response => response.text())
-.then(() => {
-    window.location.href = "thankyou.html";
-})
-.catch(error => {
-    console.error(error);
-    alert("Error submitting form");
-});
+        fetch("https://script.google.com/macros/s/AKfycbw4yYp2JkzYWCciPJ_7pIoe_2pDdgOgyYRT5tDBE4yNod8vooxY-d8kWBtjSbT90CE8/exec", {
+            method: "POST",
+            mode: "no-cors",
+            body: JSON.stringify(data)
+        })
+        .then(() => {
+            window.location.href = "thankyou.html";
+        })
+        .catch(() => {
+            alert("Error submitting form");
+
+            // Re-enable button if something fails
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Submit Application";
         });
-    }        
+    });
+}
 });
