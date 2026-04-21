@@ -471,19 +471,20 @@ button:disabled {
 }
 
 /* Slider */
+/* Fix slider size */
 .slider {
     position: relative;
-    max-width: 600px;
+    max-width: 700px;
+    height: 400px;   /* 🔥 FIXED HEIGHT */
     margin: auto;
     overflow: hidden;
 }
 
-.slides {
-    position: relative;
-}
-
+/* Make all images fit properly */
 .slide {
     width: 100%;
+    height: 100%;
+    object-fit: cover;   /* 🔥 MAGIC LINE */
     display: none;
     border-radius: 10px;
 }
@@ -491,6 +492,11 @@ button:disabled {
 .slide.active {
     display: block;
 }
+
+.slides {
+    position: relative;
+}
+
 
 /* Buttons */
 .prev, .next {
@@ -510,8 +516,63 @@ button:disabled {
     
     z-index: 10;  /* 🔥 THIS FIXES IT */
 }
-.slider {
-    position: relative;
-}
 .prev { left: 10px; }
 .next { right: 10px; }
+
+/* Fullscreen viewer */
+.fullscreen {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+    
+    z-index: 1000;
+}
+
+.fullscreen img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+}
+
+#closeBtn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Fullscreen arrows */
+.fs-prev, .fs-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    
+    background: rgba(0,0,0,0.7);
+    color: white;
+    
+    border: none;
+    padding: 15px;
+    font-size: 28px;
+    
+    cursor: pointer;
+    border-radius: 50%;
+    
+    z-index: 1001;
+}
+
+.fs-prev { left: 20px; }
+.fs-next { right: 20px; }
+
+.fs-prev:hover, .fs-next:hover {
+    background: #00ff88;
+    color: black;
+}

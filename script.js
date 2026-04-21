@@ -164,5 +164,56 @@ if (slides.length > 0 && nextBtn && prevBtn) {
     });
 }
 
+let currentSlideIndex = 0;
 
+const fullViewer = document.getElementById("fullscreenViewer");
+const fullImg = document.getElementById("fullImg");
+const closeBtn = document.getElementById("closeBtn");
+
+const fsPrev = document.querySelector(".fs-prev");
+const fsNext = document.querySelector(".fs-next");
+
+if (slides.length > 0) {
+
+    slides.forEach((slide, index) => {
+        slide.addEventListener("click", (e) => {
+            e.stopPropagation();
+            currentSlideIndex = index;
+            fullViewer.style.display = "flex";
+            fullImg.src = slides[currentSlideIndex].src;
+        });
+    });
+
+    function updateFullscreen() {
+        fullImg.src = slides[currentSlideIndex].src;
+    }
+
+    if (fsNext) {
+        fsNext.addEventListener("click", (e) => {
+            e.stopPropagation();
+            currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+            updateFullscreen();
+        });
+    }
+
+    if (fsPrev) {
+        fsPrev.addEventListener("click", (e) => {
+            e.stopPropagation();
+            currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+            updateFullscreen();
+        });
+    }
+}
+
+if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+        fullViewer.style.display = "none";
+    });
+}
+
+if (fullViewer) {
+    fullViewer.addEventListener("click", () => {
+        fullViewer.style.display = "none";
+    });
+}
 });
