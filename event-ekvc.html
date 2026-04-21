@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EKVC 2026 - Trydan Racing</title>
+    <title>IKR 2025 - Trydan Racing</title>
 
     <link rel="stylesheet" href="styles.css">
 
@@ -23,29 +23,78 @@
         <h2>EKVC 2026</h2>
 
         <p style="margin: 20px 0;">
-            The Engineering and Karting Championship (IEKVC) 2026 competition was one of our most exciting events.
-            Our team competed against top colleges and showcased our engineering excellence.
+            The EKVC (Engineer's Karting Vehicle Challenge) is a national-level student engineering competition organized by the Imperial Society of Innovative Engineers (ISIE). It provides a platform for aspiring engineers to design, fabricate, and validate a go-kart by applying real-world automotive engineering principles. The competition emphasizes both technical knowledge and practical implementation, bridging the gap between classroom learning and industry-level experience.
         </p>
 
         <h3>🏆 Achievements</h3>
         <ul style="text-align: left; margin: 20px auto; max-width: 400px;">
             <li>1st Place - Technical Inspection</li>
-            <li>Best Design Award</li>
+            <li>Best Business Plan Award</li>
             <li>Top 3 Overall Finish</li>
         </ul>
 
         <h3>📸 Team Moments</h3>
-        <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-            <img src="event1.jpg" width="200px">
-            <img src="event2.jpg" width="200px">
-            <img src="event3.jpg" width="200px">
-        </div>
+
+            <div class="slider">
+                <button class="prev">&#10094;</button>
+
+                <div class="slides">
+                    <img src="EkVC/ekvc1.jpg" class="slide active">
+                    <img src="EkVC/ekvc2.jpg" class="slide">
+                    <img src="EkVC/ekvc3.jpg" class="slide">
+                    <img src="EkVC/ekvc4.jpg" class="slide">
+                    <img src="EkVC/ekvc5.jpg" class="slide">
+                    <img src="EkVC/ekvc6.jpg" class="slide">
+                    <img src="EkVC/ekvc6.jpg" class="slide">
+                    <img src="EkVC/ekvc7.jpg" class="slide">
+                    <img src="EkVC/ekvc8.jpg" class="slide">
+                    <img src="EkVC/ekvc9.jpg" class="slide">
+                    <img src="EkVC/ekvc10.jpg" class="slide">
+                    <img src="EkVC/ekvc11.jpg" class="slide">
+                    <img src="EkVC/ekvc12.jpg" class="slide">
+                    <img src="EkVC/ekvc13.JPG" class="slide">
+                    <img src="EkVC/ekvc14.JPG" class="slide">
+                    <img src="EkVC/ekvc15.JPG" class="slide">
+                    <img src="EkVC/ekvc16.JPG" class="slide">
+                    <img src="EkVC/ekvc17.JPG" class="slide">
+                    <img src="EkVC/ekvc18.JPG" class="slide">
+                    <img src="EkVC/ekvc19.JPG" class="slide">
+                    <img src="EkVC/ekvc20.JPG" class="slide">
+                    <img src="EkVC/ekvc21.JPG" class="slide">
+                    <img src="EkVC/ekvc22.JPG" class="slide">
+                    <img src="EkVC/ekvc23.JPG" class="slide">
+                    <img src="EkVC/ekvc24.JPG" class="slide">
+                    <img src="EkVC/ekvc25.JPG" class="slide">
+                    <img src="EkVC/ekvc26.JPG" class="slide">
+                    <img src="EkVC/ekvc27.png" class="slide">
+                    <img src="EkVC/ekvc28.png" class="slide">
+                    <img src="EkVC/ekvc29.jpg" class="slide">
+                    <img src="EkVC/ekvc30.png" class="slide">
+                    <img src="EkVC/ekvc31.png" class="slide">
+                    <img src="EkVC/ekvc32.png" class="slide">
+                    <img src="EkVC/ekvc33.png" class="slide">
+                    <img src="EkVC/ekvc34.png" class="slide">
+                    <img src="EkVC/ekvc35.png" class="slide">
+                    <img src="EkVC/ekvc36.jpg" class="slide">
+                    <img src="EkVC/ekvc37.jpg" class="slide">
+                    <img src="EkVC/ekvc38.jpg" class="slide">
+                    <!-- Add more images here -->
+                </div>
+
+                <button class="next">&#10095;</button>
+            </div>
 
         <p style="margin-top: 20px;">
             This event helped us improve our design, teamwork, and racing strategy.
         </p>
 
     </div>
-
+        <div id="fullscreenViewer" class="fullscreen">
+        <button class="fs-prev">&#10094;</button>
+        <img id="fullImg">
+        <button class="fs-next">&#10095;</button>
+        <span id="closeBtn">&times;</span>
+    </div>
+<script src="script.js"></script>
 </body>
 </html>
