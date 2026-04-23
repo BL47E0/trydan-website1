@@ -166,7 +166,7 @@ if (slides.length > 0 && nextBtn && prevBtn) {
     setInterval(() => {
         currentSlide = (currentSlide + 1) % slides.length;
         showSlide(currentSlide);
-    }, 3000); // 3 seconds (change if you want slower)
+    }, 8000); // 8 seconds (change if you want slower)
 
     showSlide(0);
 }
