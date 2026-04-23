@@ -148,9 +148,10 @@ if (slides.length > 0 && nextBtn && prevBtn) {
 
     let currentSlide = 0;
 
+    const slidesContainer = document.querySelector(".slides");
+
     function showSlide(index) {
-        slides.forEach(slide => slide.classList.remove("active"));
-        slides[index].classList.add("active");
+        slidesContainer.style.transform = `translateX(-${index * 100}%)`;
     }
 
     nextBtn.addEventListener("click", () => {
@@ -166,6 +167,8 @@ if (slides.length > 0 && nextBtn && prevBtn) {
         currentSlide = (currentSlide + 1) % slides.length;
         showSlide(currentSlide);
     }, 3000); // 3 seconds (change if you want slower)
+
+    showSlide(0);
 }
 
 let currentSlideIndex = 0;

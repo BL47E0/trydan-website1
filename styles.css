@@ -482,29 +482,18 @@ button:disabled {
 
 /* Make all images fit properly */
 .slide {
-    width: 100%;
+    min-width: 100%;
     height: 100%;
     object-fit: contain;
     background: black;
-    
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-
     border-radius: 10px;
 }
 
-.slide.active {
-    opacity: 1;
-}
 
 .slides {
-    position: relative;   /* 🔥 ADD THIS */
+    display: flex;
     height: 100%;
-    background: black;
+    transition: transform 0.6s ease-in-out;
 }
 
 
@@ -589,4 +578,63 @@ button:disabled {
 
 .fullscreen img {
     object-fit: contain; /* fullscreen view */
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.3); /* 30% black */
+    z-index: 5;
+}
+
+/* Bring arrows above overlay */
+.prev, .next {
+    z-index: 10;
+}
+
+/* Main title */
+.login-container h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700; /* bold */
+}
+
+/* Subheadings */
+.login-container h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 400; /* NOT bold */
+}
+
+
+.overlay {
+    pointer-events: none;
+}
+
+.event-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    animation: fadeInUp 0.8s ease;
+}
+
+/* Green part */
+.title-green {
+    color: #00ff88;
+    text-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+}
+
+/* White part */
+.title-white {
+    color: white;
+}
+
+.back-btn-container {
+    margin-top: 70px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
 }
