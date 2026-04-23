@@ -638,3 +638,14 @@ button:disabled {
     padding-top: 20px;
     border-top: 1px solid rgba(255,255,255,0.1);
 }
+
+.achievements-title {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 600;      /* semi-bold */
+    font-size: 1.6rem;     /* bigger */
+    letter-spacing: 1px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: #00ff88;
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+}
