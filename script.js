@@ -162,6 +162,10 @@ if (slides.length > 0 && nextBtn && prevBtn) {
         currentSlide = (currentSlide - 1 + slides.length) % slides.length;
         showSlide(currentSlide);
     });
+    setInterval(() => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }, 3000); // 3 seconds (change if you want slower)
 }
 
 let currentSlideIndex = 0;

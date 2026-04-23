@@ -484,17 +484,27 @@ button:disabled {
 .slide {
     width: 100%;
     height: 100%;
-    object-fit: cover;   /* 🔥 MAGIC LINE */
-    display: none;
+    object-fit: contain;
+    background: black;
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+
     border-radius: 10px;
 }
 
 .slide.active {
-    display: block;
+    opacity: 1;
 }
 
 .slides {
-    position: relative;
+    position: relative;   /* 🔥 ADD THIS */
+    height: 100%;
+    background: black;
 }
 
 
@@ -575,4 +585,8 @@ button:disabled {
 .fs-prev:hover, .fs-next:hover {
     background: #00ff88;
     color: black;
+}
+
+.fullscreen img {
+    object-fit: contain; /* fullscreen view */
 }
