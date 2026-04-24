@@ -682,3 +682,20 @@ button:disabled {
     gap: 20px;   /* 🔥 THIS FIXES SPACING */
     margin-top: 40px;
 }
+
+.form-group select {
+    width: 100%;
+    background: var(--darker-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 0.8rem;
+    color: var(--text-white);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+}
+
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary-green);
+    box-shadow: 0 0 10px var(--accent-glow);
+}
