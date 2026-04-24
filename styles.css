@@ -699,3 +699,17 @@ button:disabled {
     border-color: var(--primary-green);
     box-shadow: 0 0 10px var(--accent-glow);
 }
+
+.logo {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+}
+
+.logo:focus,
+.logo:active,
+.logo:hover {
+    text-decoration: none;
+    color: inherit;
+}
