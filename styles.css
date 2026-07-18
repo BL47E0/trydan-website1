@@ -107,7 +107,6 @@ body {
     border-radius: 50%;
 }
 
-.logo { display: flex; align-items: center; gap: 1rem; }
 .logo-icon { animation: float 3s ease-in-out infinite; }
 .logo-text { display: flex; flex-direction: column; }
 .logo-title { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 900; color: var(--primary-green); letter-spacing: 2px; }
@@ -488,34 +487,33 @@ button:disabled {
     border-radius: 10px;
 }
 
-
 .slides {
     display: flex;
     height: 100%;
     transition: transform 0.6s ease-in-out;
 }
 
-
 /* Buttons */
 .prev, .next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    
     background: rgba(0,0,0,0.7);
     color: white;
-    
     border: none;
     padding: 12px 16px;
     font-size: 22px;
-    
     cursor: pointer;
     border-radius: 50%;
     
     z-index: 10; 
 }
-.prev { left: 10px; }
-.next { right: 10px; }
+.prev { 
+    left: 10px; 
+}
+.next { 
+    right: 10px; 
+}
 
 /* Fullscreen viewer */
 .fullscreen {
@@ -525,11 +523,9 @@ button:disabled {
     left: 0;
     width: 100%;
     height: 100%;
-    
     background: rgba(0,0,0,0.9);
     justify-content: center;
     align-items: center;
-    
     z-index: 1000;
 }
 
@@ -553,22 +549,23 @@ button:disabled {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    
     background: rgba(0,0,0,0.7);
     color: white;
-    
     border: none;
     padding: 15px;
     font-size: 28px;
-    
     cursor: pointer;
-    border-radius: 50%;
-    
+    border-radius: 50%;    
     z-index: 1001;
 }
 
-.fs-prev { left: 20px; }
-.fs-next { right: 20px; }
+.fs-prev { 
+    left: 20px; 
+}
+
+.fs-next { 
+    right: 20px; 
+}
 
 .fs-prev:hover, .fs-next:hover {
     background: #00ff88;
@@ -585,7 +582,6 @@ button:disabled {
     left: 0;
     width: 100%;
     height: 100%;
-
     background: rgba(0, 0, 0, 0.3); /* 30% black */
     z-index: 5;
 }
@@ -658,14 +654,11 @@ button:disabled {
     display: inline-block;
     margin-top: 10px;
     padding: 12px 24px;
-    
     background: #25D366; /* WhatsApp green */
     color: white;
-    
     font-weight: 600;
     border-radius: 8px;
-    text-decoration: none;
-    
+    text-decoration: none;    
     transition: 0.3s ease;
 }
 
@@ -704,6 +697,7 @@ button:disabled {
     color: inherit;
     display: flex;
     align-items: center;
+    gap: 1rem;
 }
 
 .logo:focus,
@@ -713,6 +707,7 @@ button:disabled {
     color: inherit;
 }
 
+<<<<<<< HEAD
 
 .subsystem-page {
 
@@ -867,4 +862,99 @@ button:disabled {
 
 .hero-bg {
     pointer-events: none;
+=======
+.interactive-container {
+    margin-top: 120px;
+    text-align: center;
+    padding: 40px;
+}
+
+.kart-model {
+    position: relative;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.kart-image {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.tooltip {
+    position: absolute;
+    bottom: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.9);
+    color: white;
+    padding: 10px 16px;
+    border-radius: 10px;
+    opacity: 0;
+    transition: .3s;
+}
+
+.hotspot:hover .tooltip {
+    opacity: 1;
+}
+
+.engine {
+    top: 56%;
+    left: 75%;
+}
+
+.chassis {
+    top: 70%;
+    left: 35%;
+}
+
+.steering {
+    top: 45%;
+    left: 45%;
+}
+
+@keyframes pulse {
+    50% {
+        transform: scale(1.4);
+    }
+}
+
+.hotspot {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+.dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #00ff88;
+    display: block;
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
+    animation: pulse 2s infinite;
+}
+
+.subsystem-name {
+    font-family: 'Orbitron', sans-serif;
+    color: white;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    padding: 8px 16px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.hotspot:hover .subsystem-name {
+    color: #00ff88;
+    border-color: #00ff88;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+    transform: scale(1.05);
+}
+
+.hotspot:hover .dot {
+    box-shadow: 0 0 30px rgba(0, 255, 136, 1);
+    transform: scale(1.2);
+>>>>>>> 1fef39dbe529616ade63d04126ed5d9b7f3679c6
 }
