@@ -246,6 +246,9 @@
                 formData.append("type", file.type);
                 formData.append("file", base64);
 
+                formData.append("subsystem", "Engine");
+                formData.append("category", "Reports");
+
                 try {
 
                     const response = await fetch(SCRIPT_URL, {
@@ -278,7 +281,7 @@
         }
 
         </script>
-        
+
 </body>
 
 </html>
