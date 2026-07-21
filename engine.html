@@ -186,11 +186,23 @@
 
                 <div class="upload-card">
 
-                    <span class="upload-icon">+</span>
+                    <input
+                        type="file"
+                        id="reportFile"
+                        hidden
+                        onchange="uploadFile(this.files[0])"
+                    >
 
-                    <p>Reports</p>
+                    <label for="reportFile">
+
+                        <span class="upload-icon">+</span>
+
+                        <p>Reports</p>
+
+                    </label>
 
                 </div>
+
 
                 <div class="upload-card">
 
@@ -213,6 +225,60 @@
 
     </div>
 
+    <script>
+
+        const SCRIPT_URL =
+            "https://script.google.com/macros/s/AKfycbyd3jMj5xbNatK0gpx71HPm7ZDcdRj-dFketO6bcu0xJTTNs6KaCrlQkGp96EerGM-2/exec";
+
+        async function uploadFile(file) {
+
+            if (!file) return;
+
+            const reader = new FileReader();
+
+            reader.onload = async function () {
+
+                const base64 = reader.result.split(",")[1];
+
+                const formData = new URLSearchParams();
+
+                formData.append("name", file.name);
+                formData.append("type", file.type);
+                formData.append("file", base64);
+
+                try {
+
+                    const response = await fetch(SCRIPT_URL, {
+                        method: "POST",
+                        body: formData
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+
+                        alert("File uploaded successfully!");
+
+                    } else {
+
+                        alert("Upload failed.");
+
+                    }
+
+                } catch (error) {
+
+                    console.error(error);
+
+                    alert("Error uploading file.");
+
+                }
+            };
+
+            reader.readAsDataURL(file);
+        }
+
+        </script>
+        
 </body>
 
 </html>
