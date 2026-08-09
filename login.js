@@ -6,26 +6,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // Prevent the form from submitting normally
+            e.preventDefault();
 
             const username = usernameInput.value;
             const password = passwordInput.value;
 
-            // Check the credentials
+            // Check credentials
             if (username === 'trydannmit' && password === 'trydan123123') {
-                // Correct credentials
+
+                // Remember that the user has logged in
+                sessionStorage.setItem('trydanLoggedIn', 'true');
+
                 errorMessage.style.display = 'none';
-                
-                // Redirect to the URL where your Node.js server is running.
-                // Your server.js file shows it runs on port 3000.
-                window.location.href = 'https://trydandashboard-2.onrender.com';
+
+                // Open the subsystem menu
+                window.location.href = 'subsystems.html';
 
             } else {
-                // Incorrect credentials
                 errorMessage.textContent = 'Invalid username or password.';
                 errorMessage.style.display = 'block';
             }
         });
     }
 });
-

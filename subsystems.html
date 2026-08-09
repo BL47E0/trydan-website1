@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Subsystems - Trydan Racing</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        .subsystems-page {
+            min-height: 100vh;
+            padding: 120px 8% 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .subsystems-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .subsystems-header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+
+        .subsystems-header p {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-gray);
+        }
+
+        .subsystems-grid {
+            max-width: 1100px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .subsystem-card {
+            text-decoration: none;
+            color: inherit;
+
+            padding: 35px 25px;
+
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 15px;
+
+            background: rgba(255, 255, 255, 0.04);
+
+            text-align: center;
+
+            transition: all 0.3s ease;
+        }
+
+        .subsystem-card:hover {
+            transform: translateY(-8px);
+
+            border-color: var(--primary-green);
+
+            box-shadow: 0 10px 30px rgba(0, 255, 120, 0.15);
+        }
+
+        .subsystem-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .subsystem-card h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary-green);
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .subsystem-card p {
+            font-family: 'Rajdhani', sans-serif;
+            color: var(--text-gray);
+            font-size: 1rem;
+        }
+
+        .logout-btn {
+            display: block;
+            margin: 50px auto 0;
+
+            padding: 12px 30px;
+
+            border: 1px solid var(--primary-green);
+            border-radius: 8px;
+
+            background: transparent;
+            color: var(--primary-green);
+
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        .logout-btn:hover {
+            background: var(--primary-green);
+            color: black;
+        }
+
+        @media (max-width: 900px) {
+            .subsystems-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .subsystems-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .subsystems-header h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Background -->
+    <div class="hero-bg">
+        <span class="streak"></span>
+        <span class="streak"></span>
+        <span class="streak"></span>
+        <span class="streak"></span>
+        <span class="streak"></span>
+        <span class="streak"></span>
+
+        <span class="star"></span>
+        <span class="star"></span>
+        <span class="star"></span>
+        <span class="star"></span>
+        <span class="star"></span>
+        <span class="star"></span>
+    </div>
+
+
+    <main class="subsystems-page">
+
+        <div class="subsystems-header">
+
+            <h1>TRYDAN SUBSYSTEMS</h1>
+
+            <p>
+                Select a subsystem to view its specifications,
+                documents and technical information.
+            </p>
+
+        </div>
+
+
+        <div class="subsystems-grid">
+
+            <!-- Chassis -->
+            <a href="chassis.html" class="subsystem-card">
+
+                <div class="subsystem-icon">🏎️</div>
+
+                <h2>CHASSIS</h2>
+
+                <p>
+                    Frame structure, materials,
+                    dimensions and specifications.
+                </p>
+
+            </a>
+
+
+            <!-- Drivetrain -->
+            <a href="drivetrain.html" class="subsystem-card">
+
+                <div class="subsystem-icon">⚙️</div>
+
+                <h2>DRIVETRAIN</h2>
+
+                <p>
+                    Drivetrain components,
+                    transmission and specifications.
+                </p>
+
+            </a>
+
+
+            <!-- Engine -->
+            <a href="engine.html" class="subsystem-card">
+
+                <div class="subsystem-icon">🔥</div>
+
+                <h2>ENGINE</h2>
+
+                <p>
+                    Engine specifications,
+                    components and technical details.
+                </p>
+
+            </a>
+
+
+            <!-- Electronics -->
+            <a href="electronics.html" class="subsystem-card">
+
+                <div class="subsystem-icon">⚡</div>
+
+                <h2>ELECTRONICS</h2>
+
+                <p>
+                    Electrical systems,
+                    sensors and wiring information.
+                </p>
+
+            </a>
+
+
+            <!-- Braking -->
+            <a href="braking.html" class="subsystem-card">
+
+                <div class="subsystem-icon">🛑</div>
+
+                <h2>BRAKING</h2>
+
+                <p>
+                    Braking system components
+                    and specifications.
+                </p>
+
+            </a>
+
+
+            <!-- Steering -->
+            <a href="steering.html" class="subsystem-card">
+
+                <div class="subsystem-icon">🎯</div>
+
+                <h2>STEERING</h2>
+
+                <p>
+                    Steering components,
+                    geometry and specifications.
+                </p>
+
+            </a>
+
+        </div>
+
+
+        <button class="logout-btn" onclick="logout()">
+            LOGOUT
+        </button>
+
+    </main>
+
+
+    <script>
+
+        // Make sure the user actually logged in
+        if (sessionStorage.getItem('trydanLoggedIn') !== 'true') {
+            window.location.href = 'login.html';
+        }
+
+
+        function logout() {
+
+            sessionStorage.removeItem('trydanLoggedIn');
+
+            window.location.href = 'login.html';
+
+        }
+
+    </script>
+
+</body>
+
+</html>
