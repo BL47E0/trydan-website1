@@ -66,6 +66,64 @@ def test_storage():
         "files": files
     }
 
+@app.route("/files/<subsystem>/<category>", methods=["GET"])
+def list_files(subsystem, category):
+    if subsystem not in SUBSYSTEMS:
+        return {"error": "Invalid subsystem"}, 400
+
+    if category not in CATEGORIES:
+        return {"error": "Invalid category"}, 400
+
+    prefix = f"{subsystem}/{category}/"
+
+    paginator = s3.get_paginator("list_objects_v2")
+
+    files = []
+
+    for page in paginator.paginate(
+        Bucket=B2_BUCKET_NAME,
+        Prefix=prefix
+    ):
+        for obj in page.get("Contents", []):
+            files.append({
+                "filename": obj["Key"].replace(prefix, "", 1),
+                "size": obj["Size"],
+                "last_modified": obj["LastModified"].isoformat()
+            })
+
+    return {
+        "subsystem": subsystem,
+        "category": category,
+        "files": files
+    }
+    if subsystem not in SUBSYSTEMS:
+        return {"error": "Invalid subsystem"}, 400
+
+    if category not in CATEGORIES:
+        return {"error": "Invalid category"}, 400
+
+    prefix = f"{subsystem}/{category}/"
+
+    response = s3.list_objects_v2(
+        Bucket=B2_BUCKET_NAME,
+        Prefix=prefix
+    )
+
+    files = []
+
+    for obj in response.get("Contents", []):
+        files.append({
+            "filename": obj["Key"].replace(prefix, ""),
+            "size": obj["Size"],
+            "last_modified": obj["LastModified"].isoformat()
+        })
+
+    return {
+        "subsystem": subsystem,
+        "category": category,
+        "files": files
+    }
+
 
 @app.route("/upload", methods=["POST"])
 def upload_file():
