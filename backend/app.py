@@ -3,10 +3,35 @@ import os
 import boto3
 from dotenv import load_dotenv
 from flask import Flask, request
+from werkzeug.utils import secure_filename
 
 load_dotenv()
 
 app = Flask(__name__)
+
+SUBSYSTEMS = {
+    "chassis",
+    "drivetrain",
+    "engine",
+    "electronics",
+    "braking",
+    "steering"
+}
+
+CATEGORIES = {
+    "bom",
+    "cad",
+    "reports",
+    "images"
+}
+
+MAX_FILE_SIZES = {
+    "bom": 25 * 1024 * 1024,
+    "cad": 100 * 1024 * 1024,
+    "reports": 25 * 1024 * 1024,
+    "images": 10 * 1024 * 1024
+}
+
 
 B2_KEY_ID = os.getenv("B2_KEY_ID")
 B2_APPLICATION_KEY = os.getenv("B2_APPLICATION_KEY")
@@ -56,8 +81,30 @@ def upload_file():
 
     if not category:
         return {"error": "No category provided"}, 400
+    
+    if subsystem not in SUBSYSTEMS:
+        return {"error": "Invalid subsystem"}, 400
 
-    object_key = f"{subsystem}/{category}/{file.filename}"
+    if category not in CATEGORIES:
+        return {"error": "Invalid category"}, 400
+
+    max_size = MAX_FILE_SIZES[category]
+
+    file.seek(0, 2)
+    file_size = file.tell()
+    file.seek(0)
+
+    if file_size > max_size:
+        return {
+            "error": f"File too large. Maximum size for {category} is {max_size // (1024 * 1024)} MB"
+        }, 413
+
+    filename = secure_filename(file.filename)
+
+    if not filename:
+        return {"error": "Invalid filename"}, 400
+
+    object_key = f"{subsystem}/{category}/{filename}"
 
     s3.upload_fileobj(
         file,
@@ -67,7 +114,7 @@ def upload_file():
 
     return {
         "status": "success",
-        "filename": file.filename,
+        "filename": filename,
         "path": object_key
     }
 
