@@ -5,11 +5,13 @@ from botocore.client import Config
 from botocore.exceptions import ClientError
 from dotenv import load_dotenv
 from flask import Flask, request
+from flask_cors import CORS
 from werkzeug.utils import secure_filename
 
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app)
 
 SUBSYSTEMS = {
     "chassis",
