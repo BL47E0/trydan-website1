@@ -1,6 +1,8 @@
 import os
 
 import boto3
+from botocore.client import Config
+from botocore.exceptions import ClientError
 from dotenv import load_dotenv
 from flask import Flask, request
 from werkzeug.utils import secure_filename
@@ -43,8 +45,8 @@ s3 = boto3.client(
     endpoint_url=B2_ENDPOINT,
     aws_access_key_id=B2_KEY_ID,
     aws_secret_access_key=B2_APPLICATION_KEY,
+    config=Config(signature_version="s3v4"),
 )
-
 
 @app.route("/")
 def home():
@@ -96,34 +98,50 @@ def list_files(subsystem, category):
         "category": category,
         "files": files
     }
+
+@app.route("/download/<subsystem>/<category>/<filename>", methods=["GET"])
+def download_file(subsystem, category, filename):
     if subsystem not in SUBSYSTEMS:
         return {"error": "Invalid subsystem"}, 400
 
     if category not in CATEGORIES:
         return {"error": "Invalid category"}, 400
 
-    prefix = f"{subsystem}/{category}/"
+    filename = secure_filename(filename)
 
-    response = s3.list_objects_v2(
-        Bucket=B2_BUCKET_NAME,
-        Prefix=prefix
-    )
+    if not filename:
+        return {"error": "Invalid filename"}, 400
 
-    files = []
+    object_key = f"{subsystem}/{category}/{filename}"
 
-    for obj in response.get("Contents", []):
-        files.append({
-            "filename": obj["Key"].replace(prefix, ""),
-            "size": obj["Size"],
-            "last_modified": obj["LastModified"].isoformat()
-        })
+    try:
+        s3.head_object(
+            Bucket=B2_BUCKET_NAME,
+            Key=object_key
+        )
 
-    return {
-        "subsystem": subsystem,
-        "category": category,
-        "files": files
-    }
+        download_url = s3.generate_presigned_url(
+            "get_object",
+            Params={
+                "Bucket": B2_BUCKET_NAME,
+                "Key": object_key
+            },
+            ExpiresIn=300
+        )
 
+        return {
+            "filename": filename,
+            "download_url": download_url,
+            "expires_in": 300
+        }
+
+    except ClientError as e:
+        error_code = e.response["Error"]["Code"]
+
+        if error_code in ["404", "NoSuchKey", "NotFound"]:
+            return {"error": "File not found"}, 404
+
+        return {"error": "Could not generate download URL"}, 500
 
 @app.route("/upload", methods=["POST"])
 def upload_file():
