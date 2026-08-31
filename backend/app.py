@@ -143,6 +143,47 @@ def download_file(subsystem, category, filename):
 
         return {"error": "Could not generate download URL"}, 500
 
+
+@app.route("/files/<subsystem>/<category>/<filename>", methods=["DELETE"])
+def delete_file(subsystem, category, filename):
+    if subsystem not in SUBSYSTEMS:
+        return {"error": "Invalid subsystem"}, 400
+
+    if category not in CATEGORIES:
+        return {"error": "Invalid category"}, 400
+
+    filename = secure_filename(filename)
+
+    if not filename:
+        return {"error": "Invalid filename"}, 400
+
+    object_key = f"{subsystem}/{category}/{filename}"
+
+    try:
+        s3.head_object(
+            Bucket=B2_BUCKET_NAME,
+            Key=object_key
+        )
+
+        s3.delete_object(
+            Bucket=B2_BUCKET_NAME,
+            Key=object_key
+        )
+
+        return {
+            "status": "success",
+            "filename": filename,
+            "path": object_key
+        }
+
+    except ClientError as e:
+        error_code = e.response["Error"]["Code"]
+
+        if error_code in ["404", "NoSuchKey", "NotFound"]:
+            return {"error": "File not found"}, 404
+
+        return {"error": "Could not delete file"}, 500
+
 @app.route("/upload", methods=["POST"])
 def upload_file():
     file = request.files.get("file")
