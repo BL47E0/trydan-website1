@@ -2,28 +2,50 @@ const API_BASE_URL = "http://127.0.0.1:5000";
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    const reportsCard = document.getElementById("reportsCard");
+    const subsystem = document.body.dataset.subsystem;
+
     const storageModal = document.getElementById("storageModal");
     const closeStorageModal = document.getElementById("closeStorageModal");
+    const storageModalTitle = document.getElementById("storageModalTitle");
     const storageFileList = document.getElementById("storageFileList");
     const storageFileInput = document.getElementById("storageFileInput");
     const storageUploadButton = document.getElementById("storageUploadButton");
 
-    if (!reportsCard) {
-        return;
-    }
+    const categoryCards = {
+        bom: document.getElementById("bomCard"),
+        cad: document.getElementById("cadCard"),
+        reports: document.getElementById("reportsCard"),
+        images: document.getElementById("imagesCard")
+    };
 
-    reportsCard.addEventListener("click", async () => {
+    let currentCategory = null;
 
-        storageModal.classList.add("active");
+    Object.entries(categoryCards).forEach(([category, card]) => {
 
-        await loadFiles();
+        if (!card) {
+            return;
+        }
+
+        card.addEventListener("click", async () => {
+
+            currentCategory = category;
+
+            storageModalTitle.textContent =
+                getCategoryDisplayName(category);
+
+            storageModal.classList.add("active");
+
+            await loadFiles();
+
+        });
 
     });
+
 
     closeStorageModal.addEventListener("click", () => {
         storageModal.classList.remove("active");
     });
+
 
     storageModal.addEventListener("click", (event) => {
 
@@ -32,6 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
     });
+
 
     storageUploadButton.addEventListener("click", async () => {
 
@@ -42,11 +65,16 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        if (!currentCategory) {
+            alert("Please select a category first.");
+            return;
+        }
+
         const formData = new FormData();
 
         formData.append("file", file);
-        formData.append("subsystem", "braking");
-        formData.append("category", "reports");
+        formData.append("subsystem", subsystem);
+        formData.append("category", currentCategory);
 
         storageUploadButton.disabled = true;
         storageUploadButton.textContent = "Uploading...";
@@ -88,14 +116,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
+
     async function loadFiles() {
+
+        if (!subsystem || !currentCategory) {
+            return;
+        }
 
         storageFileList.innerHTML = "<p>Loading files...</p>";
 
         try {
 
             const response = await fetch(
-                `${API_BASE_URL}/files/braking/reports`
+                `${API_BASE_URL}/files/${subsystem}/${currentCategory}`
             );
 
             const data = await response.json();
@@ -145,18 +178,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 const deleteButton =
                     fileRow.querySelector(".storage-delete-button");
 
+
                 downloadButton.addEventListener("click", async () => {
 
                     try {
 
                         const response = await fetch(
-                            `${API_BASE_URL}/download/braking/reports/${encodeURIComponent(file.filename)}`
+                            `${API_BASE_URL}/download/${subsystem}/${currentCategory}/${encodeURIComponent(file.filename)}`
                         );
 
                         const data = await response.json();
 
                         if (!response.ok) {
-                            throw new Error(data.error || "Download failed");
+                            throw new Error(
+                                data.error || "Download failed"
+                            );
                         }
 
                         window.open(data.download_url, "_blank");
@@ -185,7 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     try {
 
                         const response = await fetch(
-                            `${API_BASE_URL}/files/braking/reports/${encodeURIComponent(file.filename)}`,
+                            `${API_BASE_URL}/files/${subsystem}/${currentCategory}/${encodeURIComponent(file.filename)}`,
                             {
                                 method: "DELETE"
                             }
@@ -194,7 +230,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         const data = await response.json();
 
                         if (!response.ok) {
-                            throw new Error(data.error || "Delete failed");
+                            throw new Error(
+                                data.error || "Delete failed"
+                            );
                         }
 
                         await loadFiles();
@@ -208,6 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
 
                 });
+
 
                 storageFileList.appendChild(fileRow);
 
@@ -226,6 +265,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+
+function getCategoryDisplayName(category) {
+
+    const names = {
+        bom: "Bill of Materials",
+        cad: "CAD Files",
+        reports: "Reports",
+        images: "Images"
+    };
+
+    return names[category] || category;
+
+}
+
+
 function formatFileSize(bytes) {
 
     if (bytes < 1024) {
@@ -237,4 +291,5 @@ function formatFileSize(bytes) {
     }
 
     return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+
 }

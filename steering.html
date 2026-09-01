@@ -14,7 +14,7 @@
 
 </head>
 
-<body class="login-page-body">
+<body class="login-page-body" data-subsystem="steering">
 
     <!-- Background -->
 
@@ -168,43 +168,31 @@
 
             <div class="upload-grid">
 
-                <div class="upload-card">
-
+                <div class="upload-card" id="bomCard">
                     <span class="upload-icon">+</span>
-
                     <p>Bill of Materials</p>
-
                 </div>
 
-                <div class="upload-card">
-
+                <div class="upload-card" id="cadCard">
                     <span class="upload-icon">+</span>
-
                     <p>CAD Files</p>
-
                 </div>
 
-                <div class="upload-card">
-
+                <div class="upload-card" id="reportsCard">
                     <span class="upload-icon">+</span>
-
                     <p>Reports</p>
-
                 </div>
 
-                <div class="upload-card">
-
+                <div class="upload-card" id="imagesCard">
                     <span class="upload-icon">+</span>
-
                     <p>Images</p>
-
                 </div>
 
             </div>
 
         </section>
 
-        <a href="../interactive-kart.html"
+        <a href="subsystems.html"
            class="btn-secondary subsystem-back">
 
             ← Back to Kart
@@ -212,6 +200,36 @@
         </a>
 
     </div>
+    
+    <div id="storageModal" class="storage-modal">
+
+        <div class="storage-modal-content">
+
+            <button id="closeStorageModal" class="storage-modal-close">
+                &times;
+            </button>
+
+            <h2 id="storageModalTitle">Reports</h2>
+
+            <div id="storageFileList">
+                <p>Loading files...</p>
+            </div>
+
+            <div class="storage-upload-area">
+
+                <input type="file" id="storageFileInput">
+
+                <button id="storageUploadButton">
+                    Upload File
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="storage.js"></script>
 
 </body>
 

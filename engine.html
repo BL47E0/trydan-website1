@@ -14,7 +14,7 @@
 
 </head>
 
-<body class="login-page-body">
+<body class="login-page-body" data-subsystem="engine">
 
     <!-- Background -->
 
@@ -156,55 +156,31 @@
 
             <div class="upload-grid">
 
-                <div class="upload-card">
-
+                <div class="upload-card" id="bomCard">
                     <span class="upload-icon">+</span>
-
                     <p>Bill of Materials</p>
-
                 </div>
 
-                <div class="upload-card">
-
+                <div class="upload-card" id="cadCard">
                     <span class="upload-icon">+</span>
-
                     <p>CAD Files</p>
-
                 </div>
 
-                <div class="upload-card">
-
-                    <input
-                        type="file"
-                        id="reportFile"
-                        hidden
-                        onchange="uploadFile(this.files[0])"
-                    >
-
-                    <label for="reportFile">
-
-                        <span class="upload-icon">+</span>
-
-                        <p>Reports</p>
-
-                    </label>
-
-                </div>
-
-
-                <div class="upload-card">
-
+                <div class="upload-card" id="reportsCard">
                     <span class="upload-icon">+</span>
+                    <p>Reports</p>
+                </div>
 
+                <div class="upload-card" id="imagesCard">
+                    <span class="upload-icon">+</span>
                     <p>Images</p>
-
                 </div>
 
             </div>
 
         </section>
 
-        <a href="../interactive-kart.html"
+        <a href="subsystems.html"
            class="btn-secondary subsystem-back">
 
             ← Back to Kart
@@ -212,63 +188,36 @@
         </a>
 
     </div>
+    
+    <div id="storageModal" class="storage-modal">
 
-    <script>
+        <div class="storage-modal-content">
 
-        const SCRIPT_URL =
-            "https://script.google.com/macros/s/AKfycbyd3jMj5xbNatK0gpx71HPm7ZDcdRj-dFketO6bcu0xJTTNs6KaCrlQkGp96EerGM-2/exec";
+            <button id="closeStorageModal" class="storage-modal-close">
+                &times;
+            </button>
 
-        async function uploadFile(file) {
+            <h2 id="storageModalTitle">Reports</h2>
 
-            if (!file) return;
+            <div id="storageFileList">
+                <p>Loading files...</p>
+            </div>
 
-            const reader = new FileReader();
+            <div class="storage-upload-area">
 
-            reader.onload = async function () {
+                <input type="file" id="storageFileInput">
 
-                const base64 = reader.result.split(",")[1];
+                <button id="storageUploadButton">
+                    Upload File
+                </button>
 
-                const formData = new URLSearchParams();
+            </div>
 
-                formData.append("name", file.name);
-                formData.append("type", file.type);
-                formData.append("file", base64);
+        </div>
 
-                formData.append("subsystem", "Engine");
-                formData.append("category", "Reports");
+    </div>
 
-                try {
-
-                    const response = await fetch(SCRIPT_URL, {
-                        method: "POST",
-                        body: formData
-                    });
-
-                    const data = await response.json();
-
-                    if (data.success) {
-
-                        alert("File uploaded successfully!");
-
-                    } else {
-
-                        alert("Upload failed.");
-
-                    }
-
-                } catch (error) {
-
-                    console.error(error);
-
-                    alert("Error uploading file.");
-
-                }
-            };
-
-            reader.readAsDataURL(file);
-        }
-
-        </script>
+    <script src="storage.js"></script>
 
 </body>
 
