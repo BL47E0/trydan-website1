@@ -4,5 +4,11 @@
     "api/index.py": {
       "excludeFiles": "**/*.{jpg,JPG,jpeg,png,webp,gif,mp4,pdf}"
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "/api/index"
+    }
+  ]
 }
