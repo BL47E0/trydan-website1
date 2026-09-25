@@ -2,16 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "functions": {
     "api/index.py": {
-      "excludeFiles": [
-        "**/*.jpg",
-        "**/*.JPG",
-        "**/*.jpeg",
-        "**/*.png",
-        "**/*.webp",
-        "**/*.gif",
-        "**/*.mp4",
-        "**/*.pdf"
-      ]
+      "excludeFiles": "**/*.{jpg,JPG,jpeg,png,webp,gif,mp4,pdf}"
     }
   }
 }
